@@ -24,7 +24,36 @@ components:
                 type: integer
                 example: 101
           - $ref: '#/components/schemas/voitures'
+  responses:
+    BadRequest:
+      description: Requête mal formée ou paramètres invalides.
+      content:
+        application/json:
+          schema:
+            $ref: '#'
+          example:
+            message: "Données de la requête invalides ou incomplètes."
+            status: 400
 
+    Unauthorized:
+      description: Jeton d'authentification absent, expiré ou invalide.
+      content:
+        application/json:
+          schema:
+            $ref: '#'
+          example:
+            message: "Accès refusé. Jeton Bearer manquant ou invalide."
+            status: 401
+
+    NotFound:
+      description: Ressource introuvable.
+      content:
+        application/json:
+          schema:
+            $ref: '#'
+          example:
+            message: "Aucun article trouvé avec cet identifiant."
+            status: 404
 
 
 
