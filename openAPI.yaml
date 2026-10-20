@@ -78,4 +78,15 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/voitures'
-  
+    delete:
+      summary: Delete orderdays by id
+      security:
+        - bearerAuth: []
+
+      parameters: 
+        - name 
+      responses:
+        '204':
+          description: Deleted
+        '404':
+          description: id not found
