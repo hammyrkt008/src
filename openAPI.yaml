@@ -1,6 +1,29 @@
 openapi: 3.0.3
 info:
-  title: API de Gestion d'Articles
-  description: Spécification d'une API RESTful pour la gestion d'une collection d'articles avec pagination et authentification Bearer JWT.
+  title: API de Gestion de voitures
+  description: Spécification d'une API RESTful pour la gestion de voitures
   version: 1.0.0
 
+paths:
+  /articles:
+    get:
+      summary: Récupérer la liste des voitures
+      description: Renvoie la collection des modèles avec gestion de la marque.
+      parameters:
+        - name: marque
+          in: query
+          required: true
+          description: Numéro de la marque de la voiture.
+          schema:
+            type: string
+            default: ford
+            minimum: 1
+        - name: modèles
+          in: query
+          required: true
+          description: modèles de la voiture à retourner.
+          schema:
+            type: string
+            default: T
+            minimum: 1
+            maximum: 100
