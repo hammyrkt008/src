@@ -1,1 +1,25 @@
+name: OpenAPI Lint CI
 
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupérer le code source
+        uses: actions/checkout@v4
+
+      - name: Configurer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Installer Redocly CLI
+        run: npm install -g @redocly/cli
+
+      - name: Linter la définition OpenAPI
+        run: redocly lint src/openAPI.yaml
