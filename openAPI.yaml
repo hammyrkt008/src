@@ -3,9 +3,22 @@ info:
   title: API de Gestion de voitures
   description: Spécification d'une API RESTful pour la gestion de voitures
   version: 1.0.0
+components: 
+  schemas:
+     voitures:
+      type: object
+      properties:
+        id:
+          type: integer
+        marque:
+          type: string
+        modèle:
+          type: string
+
+
 
 paths:
-  /articles:
+  /voitures:
     get:
       summary: Récupérer la liste des voitures
       description: Renvoie la collection des modèles avec gestion de la marque.
@@ -27,3 +40,42 @@ paths:
             default: T
             minimum: 1
             maximum: 100
+      responses:
+        '200':
+          description: Liste des modèle.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/voitures'
+                example:
+                  - id: 1
+                    marque: "Ford"
+                    modèles: "T"
+                    published: true
+                  - id: 2
+                    marque: "Opel"
+                    modèles: "Corsa"
+                    published: false
+
+    post:
+      summary: Créer un nouveau modèles
+      description: Ajoute le modèles
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        description: le modèle à ajouter.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/voitures'
+      responses:
+        '201':
+          description: Modèles ajouter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/voitures'
+  
